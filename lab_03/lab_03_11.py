@@ -3,9 +3,10 @@
 def huffman(p):
     """Возвращает словарь вида: символ - код символа"""
     # Если всего два элемента во входном словаре, то первому присваивается код 0, а второму 1
+    if len(p) == 1:
+        return dict(zip(p.keys(), ['0']))
     if len(p) == 2:
         return dict(zip(p.keys(), ['0', '1']))
-
     # Соединяем два элемента во входном словаре с наименьшими вероятностями
     pCopy = p.copy()
     a1, a2 = lowestProbabilitiesPair(p)
@@ -97,8 +98,8 @@ def encodeLZ(fileIn, fileOut):
         index = 1
         for i in range(0, len(s)):
             tmp += s[i]
-            if (dict.get(tmp)) is None:
-                if (dict.get(tmp[0:len(tmp) - 1])) is None:
+            if tmp not in dict:
+                if len(tmp) == 1:
                     code = code + "0," + tmp + "_"
                     dict[tmp] = index
                     index += 1
@@ -134,7 +135,7 @@ def decodeLZ(fileIn, fileOut):
             c = item[item.find(",") + 1:]
             if c == "-": c = ""
             if i == "0":
-                decode = decode + c
+                decode += c
                 dict[str(index)] = c
                 index += 1
                 continue
@@ -149,11 +150,19 @@ def decodeLZ(fileIn, fileOut):
         return False
 
 
+# print(encodeHuffman("inc.txt", "huffman_encode.txt"))
+# print(decodeHuffman("huffman_encode.txt", "huffman_decode.txt") )
+# print(encodeLZ("inc.txt", "lz_encode.txt"))
+# print(decodeLZ("lz_encode.txt", "lz_decode.txt"))
+
 if (encodeHuffman("inc.txt", "huffman_encode.txt") and
         decodeHuffman("huffman_encode.txt", "huffman_decode.txt") and
         encodeLZ("inc.txt", "lz_encode.txt") and
         decodeLZ("lz_encode.txt", "lz_decode.txt")):
     print("Сжатие успешно!")
+else:
+    print("Кодирование неуспешно!")
+
 inc = open("inc.txt", "r")
 huffman_encode = open("huffman_encode.txt", "r")
 lz_encode = open("lz_encode.txt", "r")

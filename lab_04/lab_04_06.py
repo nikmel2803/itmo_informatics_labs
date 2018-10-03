@@ -48,11 +48,11 @@ class HammingEncoder:
         for s in s1:
             s = list(s)
 
-            originalS = self.calculateControlBits(s.copy())
+            newS = self.calculateControlBits(s.copy())
             summa = 0
             for d in range(self.controlBits):
                 ind = int(math.pow(2, d) - 1)
-                if originalS[ind] != s[ind]:
+                if newS[ind] != s[ind]:
                     summa += int(math.pow(2, d))
             if summa != 0:
                 if s[summa - 1] == "0":
@@ -66,4 +66,4 @@ class HammingEncoder:
 
 hamm = HammingEncoder(8)
 print("Hamming encode: ", hamm.encode("01000100"))
-print("Hamming decode: ", hamm.decode("110111010100"))
+print("Hamming decode: ", hamm.decode("010110010100"))

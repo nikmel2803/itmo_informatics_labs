@@ -93,18 +93,6 @@ class LogicFunction:
                 result.append(a[i])
             return "".join(result)
 
-        # Проверка соответствия b к a
-        # Другими словами: если a = 0011, а b = 00-1,
-        # то функция вернёт True (вместо "-" можно подставить 1 и получится a)
-        def match(a, b):
-            result = True
-            for i in range(len(a)):
-                if b[i] == "-":
-                    continue
-                if b[i] != a[i]:
-                    result = False
-            return result
-
         # Кароч эта функция возращает список импликантов
         # см. https://ru.wikipedia.org/wiki/Метод_Куайна_—_Мак-Класки, Шаг 1
         # Тут рекурсия
@@ -156,6 +144,18 @@ class LogicFunction:
                 delete_columnes(table, index_horiz, index_vertical)
             else:
                 delete_columnes(table, index_horiz, index_vertical + 1)
+
+        # Проверка соответствия b к a
+        # Другими словами: если a = 0011, а b = 00-1,
+        # то функция вернёт True (вместо "-" можно подставить 1 и получится a)
+        def match(a, b):
+            result = True
+            for i in range(len(a)):
+                if b[i] == "-":
+                    continue
+                if b[i] != a[i]:
+                    result = False
+            return result
 
         # Подсчёт суммы элементов колонки
         def column_sum(table, colIndex):

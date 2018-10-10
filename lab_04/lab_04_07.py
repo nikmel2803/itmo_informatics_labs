@@ -128,6 +128,8 @@ class LogicFunction:
 
         # из полученной колекции получаем список импликантов
         impl = return_impl(collections)
+        print("collections: ", collections)
+        print("impl: ", impl)
 
         # Конец реализации первого шага
 
@@ -167,6 +169,18 @@ class LogicFunction:
                     index = j
             return summa, index
 
+        # Ищет на какой строке сумма элементов максимальна
+        # Возращает номер такой строки
+        def max_line_sum(table):
+            max = 0
+            max_index = 0
+            for i in range(len(table)):
+                summa = sum(table[i])
+                if summa > max:
+                    max = summa
+                    max_index = i
+            return max_index
+
         # Работаем с таблицей простых импликант
         # Это основная функция шага 2
         # Тут рекурсия
@@ -175,6 +189,12 @@ class LogicFunction:
             for i in range(len(table[0])):
                 summa, index = column_sum(table, i)
                 if summa == 1:
+                    delete_columnes(table, index)
+                    del table[index]
+                    output += impl.pop(index)
+                    break
+                else:
+                    index = max_line_sum(table)
                     delete_columnes(table, index)
                     del table[index]
                     output += impl.pop(index)
@@ -191,7 +211,7 @@ class LogicFunction:
             table.append([])
             for item in range(len(collections)):
                 table[j].append(1 if match(collections[item], impl[j]) else 0)
-
+        print("table: ", table)
         output = table_pars(table, impl)
         # Конец реализации шага 2
 
@@ -240,21 +260,39 @@ class LogicFunction:
 rows = [
     Row([0, 0, 0, 0], 0),
     Row([0, 0, 0, 1], 0),
-    Row([0, 0, 1, 0], 0),
-    Row([0, 0, 1, 1], 0),
-    Row([0, 1, 0, 0], 1),
+    Row([0, 0, 1, 0], 1),
+    Row([0, 0, 1, 1], 1),
+    Row([0, 1, 0, 0], 0),
     Row([0, 1, 0, 1], 0),
     Row([0, 1, 1, 0], 0),
     Row([0, 1, 1, 1], 0),
     Row([1, 0, 0, 0], 1),
     Row([1, 0, 0, 1], 1),
     Row([1, 0, 1, 0], 1),
-    Row([1, 0, 1, 1], 1),
-    Row([1, 1, 0, 0], 1),
-    Row([1, 1, 0, 1], 0),
-    Row([1, 1, 1, 0], 1),
+    Row([1, 0, 1, 1], 0),
+    Row([1, 1, 0, 0], 0),
+    Row([1, 1, 0, 1], 1),
+    Row([1, 1, 1, 0], 0),
     Row([1, 1, 1, 1], 1)
 ]
+# rows = [
+#     Row([0, 0, 0, 0], 0),
+#     Row([0, 0, 0, 1], 0),
+#     Row([0, 0, 1, 0], 0),
+#     Row([0, 0, 1, 1], 0),
+#     Row([0, 1, 0, 0], 1),
+#     Row([0, 1, 0, 1], 0),
+#     Row([0, 1, 1, 0], 0),
+#     Row([0, 1, 1, 1], 0),
+#     Row([1, 0, 0, 0], 1),
+#     Row([1, 0, 0, 1], 1),
+#     Row([1, 0, 1, 0], 1),
+#     Row([1, 0, 1, 1], 1),
+#     Row([1, 1, 0, 0], 1),
+#     Row([1, 1, 0, 1], 0),
+#     Row([1, 1, 1, 0], 1),
+#     Row([1, 1, 1, 1], 1)
+# ]
 # rows = [
 #     Row([0, 0, 0, 0], 1),
 #     Row([0, 0, 0, 1], 1),

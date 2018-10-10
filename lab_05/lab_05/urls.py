@@ -20,5 +20,6 @@ import views
 urlpatterns = [
     path('', views.index),
     path('hello/', views.indexRender),
+    path('universityInfo/', views.universityInfo),
     path('admin/', admin.site.urls),
 ]

@@ -6,6 +6,12 @@
 </head>
 <body>
 <table style="width:100%;border-collapse:collapse" border="1">
+    <tr>
+        <td>Группа</td>
+        <td>Табельный номер</td>
+        <td>ФИО</td>
+        <td>Стипендия</td>
+    </tr>
     {% for group in groups %}
     {% for student in group.students %}
     <tr>

@@ -23,5 +23,6 @@ urlpatterns = [
     path('disciplineInfo/', views.disciplineInfo),
     path('universityInfo/', views.universityInfo),
     path('groupsInfo/', views.groupsInfo),
+    path('departmentsInfo/', views.departmentsInfo),
     path('admin/', admin.site.urls),
 ]

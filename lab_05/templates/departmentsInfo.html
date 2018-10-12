@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Информация о кафедрах</title>
+    <style>
+        ul, ol {
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
 {% for cathedr in cathedrs %}
@@ -14,7 +19,6 @@ ID: {{cathedr.id}}<br>
     {% for teacher in cathedr.teachers %}
     <li>{{teacher.name}} ({{teacher.tab_number}}, {{teacher.position}})</li>
     {% endfor %}
-
 </ol>
 Образовательные программы:
 <ul>

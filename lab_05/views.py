@@ -62,3 +62,9 @@ def departmentsInfo(request):
     return render(request, 'departmentsInfo.html', {
         "cathedrs": cathedrs
     })
+
+
+def universityStructure(request):
+    return render(request, 'universityStructure.html', {
+        "data": data
+    })

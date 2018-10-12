@@ -12,9 +12,13 @@ col_fac = 0
 for mega_fac in data["units"]["education"]:
     col_fac += len(mega_fac["faculties"])
 col_cathedr = 0
+education_programs = []
 for mega_fac in data["units"]["education"]:
     for fac in mega_fac["faculties"]:
         col_cathedr += len(fac["cathedr"])
+        for cathedra in fac["cathedr"]:
+            for education_program in cathedra["education_programs"]:
+                education_programs.append(education_program)
 col_education_units = col_fac + col_cathedr + col_mega_fac
 
 
@@ -34,4 +38,11 @@ def universityInfo(request):
         "col_mega_fac": col_mega_fac,
         "col_administration_unints": col_administration_unints,
         "col_education_units": col_education_units
+    })
+
+
+def disciplineInfo(request):
+    return render(request, 'disciplineInfo.html', {
+        "ed_prog_count": len(education_programs),
+        "ed_prog": education_programs
     })

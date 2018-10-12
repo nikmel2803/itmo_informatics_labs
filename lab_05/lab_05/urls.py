@@ -22,5 +22,6 @@ urlpatterns = [
     path('hello/', views.indexRender),
     path('disciplineInfo/', views.disciplineInfo),
     path('universityInfo/', views.universityInfo),
+    path('groupsInfo/', views.groupsInfo),
     path('admin/', admin.site.urls),
 ]

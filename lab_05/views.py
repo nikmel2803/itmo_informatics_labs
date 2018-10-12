@@ -13,14 +13,18 @@ for mega_fac in data["units"]["education"]:
     col_fac += len(mega_fac["faculties"])
 col_cathedr = 0
 education_programs = []
+
+groups = []
+
 for mega_fac in data["units"]["education"]:
     for fac in mega_fac["faculties"]:
         col_cathedr += len(fac["cathedr"])
         for cathedra in fac["cathedr"]:
             for education_program in cathedra["education_programs"]:
                 education_programs.append(education_program)
+                for year in education_program["year"]:
+                    groups.extend(education_program["year"][year])
 col_education_units = col_fac + col_cathedr + col_mega_fac
-
 
 def index(request):
     return HttpResponse("Hello, world!")
@@ -45,4 +49,10 @@ def disciplineInfo(request):
     return render(request, 'disciplineInfo.html', {
         "ed_prog_count": len(education_programs),
         "ed_prog": education_programs
+    })
+
+
+def groupsInfo(request):
+    return render(request, 'groupsInfo.html', {
+        "groups": groups
     })

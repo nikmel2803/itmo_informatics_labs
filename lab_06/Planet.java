@@ -27,6 +27,7 @@ public class Planet {
         switch (param) {
             case "sunDistance":
                 result = this.sunDistance / 1000;
+                break;
             case "radius":
                 result = this.radius / 1000;
         }

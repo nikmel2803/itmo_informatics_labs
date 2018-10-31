@@ -20,18 +20,31 @@ public class FourthClass {
                 break;
         }
 
-        System.out.println("R = x1 & x2 | x3");
+        System.out.println("R = x1 & x2 | ¬x3");
         System.out.println("Таблица истинности");
         System.out.println("x1 x2 x3  R");
-        func(false, false, false);
-        func(false, false, true);
-        func(false, true, false);
-        func(false, true, true);
-        func(true, false, false);
-        func(true, false, true);
-        func(true, true, false);
-        func(true, true, true);
+//        func(false, false, false);
+//        func(false, false, true);
+//        func(false, true, false);
+//        func(false, true, true);
+//        func(true, false, false);
+//        func(true, false, true);
+//        func(true, true, false);
+//        func(true, true, true);
+
+        for (int x1 = 0; x1 < 2; x1++) {
+            int x2 = 0;
+            while (x2 < 2) {
+                int x3 = 0;
+                do {
+                    func(x1 != 0, x2 != 0, x3 != 0);
+                    x3++;
+                } while (x3 < 2);
+                x2++;
+            }
+        }
         System.out.println();
+
         for (int i = 0; i < 130; i++) {
             if (i > (23 * 3)) break;
             if (i % 7 == 0)
@@ -41,7 +54,7 @@ public class FourthClass {
     }
 
     public static void func(boolean x1, boolean x2, boolean x3) {
-        System.out.println((x1 ? "1 " : "0 ") + (x2 ? "1 " : "0 ") + (x3 ? "1 " : "0 ") + (x1 & x2 | x3 ? " 1" : " 0"));
+        System.out.println((x1 ? "1 " : "0 ") + (x2 ? "1 " : "0 ") + (x3 ? "1 " : "0 ") + (x1 & x2 | !x3 ? " 1" : " 0"));
     }
 
 }
